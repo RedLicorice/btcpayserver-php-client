@@ -152,7 +152,7 @@ class Client implements ClientInterface
         $body = array(
             'price'             => $item->getPrice(),
             'currency'          => $currency->getCode(),
-            'posData'           => $invoice->getPosData(),
+            'posData'           => $invoice->getPosData() ?? [],
             'notificationURL'   => $invoice->getNotificationUrl(),
             'transactionSpeed'  => $invoice->getTransactionSpeed(),
             'fullNotifications' => $invoice->isFullNotifications(),
