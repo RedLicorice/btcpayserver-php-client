@@ -110,6 +110,11 @@ class Request implements RequestInterface
     {
         return $this->scheme;
     }
+	
+	public function getSchema()
+    {
+        return $this->scheme;
+    }
 
     /**
      * This is called in the Adapter
