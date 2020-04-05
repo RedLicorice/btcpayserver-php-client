@@ -105,6 +105,7 @@ class Client implements ClientInterface
      */
     protected function fillInvoiceData(InvoiceInterface $invoice, $data)
     {
+        if(!is_array($data)) return;
         // Returns the invoice time in milliseconds. PHP's DateTime object expects the time to be in seconds
         $invoiceTime = is_numeric($data['invoiceTime']) ? intval($data['invoiceTime']/1000) : $data['invoiceTime'];
         $expirationTime = is_numeric($data['expirationTime']) ? intval($data['expirationTime']/1000) : $data['expirationTime'];
@@ -185,6 +186,10 @@ class Client implements ClientInterface
         $this->response = $this->sendRequest($request);
 
         $body = $this->parseResponse();
+        if(!is_array($body)){
+            error_log('Invalid response from btcpay server '.$body);
+            return null;
+        }
         $data = $body['data'];
 
         $invoice = $this->fillInvoiceData($invoice, $data);
